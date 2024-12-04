@@ -69,7 +69,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
 /**
@@ -147,7 +147,6 @@ function parseNumberFromString(value) {
   return parseFloat(value);
 }
 
-
 /**
  * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
  *
@@ -164,7 +163,6 @@ function parseNumberFromString(value) {
 function getParallelepipedDiagonal(a, b, c) {
   return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
-
 
 /**
  * Returns the number rounded to specified power of 10.
@@ -186,7 +184,6 @@ function getParallelepipedDiagonal(a, b, c) {
 function roundToPowerOfTen(num, pow) {
   return Math.round(num / 10 ** pow) * 10 ** pow;
 }
-
 
 /**
  * Returns true is the number is prime; otherwise false.
@@ -235,9 +232,8 @@ function isPrime(n) {
  */
 function toNumber(value, def) {
   const num = Number(value);
-  return isNaN(num) ? def : num;
+  return Number.isNaN(num) ? def : num;
 }
-
 
 /**
  * Returns the cube of the given number.
@@ -251,7 +247,8 @@ function toNumber(value, def) {
  *   0  => 0
  */
 function getCube(num) {
-  return num ** 3;
+  const result = num ** 3;
+  return result;
 }
 
 /**
@@ -269,15 +266,15 @@ function getCube(num) {
  */
 function getFibonacciNumber(index) {
   if (index <= 1) return index;
-  let a = 0, b = 1;
-  for (let i = 2; i <= index; i++) {
-    let temp = a + b;
+  let a = 0;
+  let b = 1;
+  for (let i = 2; i <= index; i += 1) {
+    const temp = a + b;
     a = b;
     b = temp;
   }
   return b;
 }
-
 
 /**
  * Returns the sum of all numbers from 1 to n.
@@ -292,13 +289,13 @@ function getFibonacciNumber(index) {
  */
 function getSumToN(n) {
   let sum = 0;
-  for (let i = 0; i <= n; i++) {
+  for (let i = 0; i <= n; i += 1) {
     sum += i;
   }
   return sum;
 }
 
-  /**
+/**
  * Returns the sum of the digits of a given number.
  *
  * @param {number} num
@@ -311,13 +308,14 @@ function getSumToN(n) {
  */
 function getSumOfDigits(num) {
   let sum = 0;
-  while (num > 0) {
-    sum += num % 10;
-    num = Math.floor(num / 10);
+  let positiveNum = Math.abs(num);
+
+  while (positiveNum > 0) {
+    sum += positiveNum % 10;
+    positiveNum = Math.floor(positiveNum / 10);
   }
   return sum;
 }
-
 /**
  * Returns true if the given number is a power of two, false otherwise.
  *
@@ -330,7 +328,7 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  return num > 0 && (num & (num - 1)) === 0;
+  return num > 0 && Math.log2(num) % 1 === 0;
 }
 
 /**
@@ -372,7 +370,7 @@ function numberToStringInBase(number, base) {
  * @example:
  * 12345, 2    => '1.23e+4'
  */
-function toExponential( number, fractionDigits ) {
+function toExponential(number, fractionDigits) {
   number.toExponential(fractionDigits);
 }
 
@@ -391,7 +389,6 @@ function toFixed(number, fractionDigits) {
   return number.toFixed(fractionDigits);
 }
 
-
 /**
  * Returns a string representation of a number in normal (fixed-point or exponential)
  * notation rounded to precision significant digits.
@@ -407,7 +404,6 @@ function toFixed(number, fractionDigits) {
 function toPrecision(number, precision) {
   return Number(number.toPrecision(precision)).toString();
 }
-
 
 /**
  * Returns the primitive value of a Number object.
@@ -439,7 +435,7 @@ function getNumberValue(number) {
  * '5'      => false
  */
 function isNumber(value) {
-  return typeof value === 'number' && !isNaN(value);
+  return typeof value === 'number' && !Number.isNaN(value);
 }
 
 /**
@@ -469,9 +465,8 @@ function isInteger(number) {
  */
 function getFloatOnString(str) {
   const result = parseFloat(str);
-  return isNaN(result) ? NaN : result;
+  return Number.isNaN(result) ? NaN : result;
 }
-
 
 /**
  * Returns an integer of the specified base or, if the number cannot be parsed
@@ -489,7 +484,7 @@ function getFloatOnString(str) {
  */
 function getIntegerOnString(str, base) {
   const parsedNumber = parseInt(str, base);
-  return isNaN(parsedNumber) ? NaN : parsedNumber;
+  return Number.isNaN(parsedNumber) ? NaN : parsedNumber;
 }
 
 /**
@@ -578,7 +573,7 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1, x2, x3;
+  return x1 + x2 + x3;
 }
 
 /**
@@ -612,7 +607,6 @@ function getMaxNumber(firstNumber, secondNumber) {
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 /**
  * Returns the length of the hypotenuse of a right triangle.
