@@ -371,7 +371,7 @@ function numberToStringInBase(number, base) {
  * 12345, 2    => '1.23e+4'
  */
 function toExponential(number, fractionDigits) {
-  number.toExponential(fractionDigits);
+  return number.toExponential(fractionDigits);
 }
 
 /**
@@ -464,8 +464,8 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  const result = parseFloat(str);
-  return Number.isNaN(result) ? NaN : result;
+  const parsedNumber = parseFloat(str);
+  return Number.isNaN(parsedNumber) ? NaN : parsedNumber;
 }
 
 /**
@@ -573,7 +573,8 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1 + x2 + x3;
+  const sum = x1 + x2 + x3;
+  return Math.round((sum + Number.EPSILON) * 1e10) / 1e10;
 }
 
 /**
@@ -619,7 +620,7 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  return Math.sqrt(a ** 2 + b ** 2);
+  return Math.hypot(a, b);
 }
 
 /**
@@ -636,7 +637,8 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  return Math.floor(number / 2) + 1;
+  if (number < 0) return 0;
+  return Math.floor((number + 1) / 2);
 }
 
 module.exports = {
