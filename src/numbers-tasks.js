@@ -464,8 +464,7 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  const parsedNumber = parseFloat(str);
-  return Number.isNaN(parsedNumber) ? NaN : parsedNumber;
+  return parseFloat(str);
 }
 
 /**
@@ -637,7 +636,10 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  if (number < 0) return 0;
+  if (typeof number !== 'number' || !Number.isFinite(number) || number < 0) {
+    return 0;
+  }
+  number = Math.floor(number);
   return Math.floor((number + 1) / 2);
 }
 
