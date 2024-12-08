@@ -639,8 +639,10 @@ function getCountOfOddNumbers(number) {
   if (typeof number !== 'number' || !Number.isFinite(number) || number < 0) {
     return 0;
   }
-  number = Math.floor(number);
-  return Math.floor((number + 1) / 2);
+
+  const roundedNumber = Math.floor(number);
+
+  return Math.floor((roundedNumber + 1) / 2);
 }
 
 module.exports = {
